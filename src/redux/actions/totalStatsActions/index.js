@@ -8,7 +8,7 @@ import {
 
 const coronaApi = CoronaApi();
 
-export const getTotalStats = (payload) => async (dispatch) => {
+export const getTotalStats = () => async (dispatch) => {
   dispatch(totalStatsLoadingTrue());
 
   const totalStats = await coronaApi.getTotalStats();

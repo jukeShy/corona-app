@@ -1,9 +1,16 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Typography, List, Card } from '~/components';
+import { getCountries } from '~/redux/actions/countriesActions';
 
 const Countries = () => {
-  const countries = useSelector((state) => state.countries);
+  const dispatch = useDispatch();
+  const countries = useSelector((state) => state.countries.items);
+  const isLoading = useSelector((state) => state.countries.isLoading);
+
+  useEffect(() => {
+    dispatch(getCountries());
+  }, [dispatch]);
 
   const _countries = countries.map((country) => (
     <List.ListItem>
@@ -15,7 +22,7 @@ const Countries = () => {
 
   return (
     <>
-      <List size='25'>{_countries}</List>
+      <List size='100'>{isLoading ? 'Loading...' : _countries}</List>
     </>
   );
 };
