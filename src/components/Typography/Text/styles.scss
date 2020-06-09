@@ -1,3 +1,9 @@
 .typography-text {
+  display: flex;
   margin: 0;
+
+  &.align-between {
+    justify-content: space-between;
+  }
+
 }

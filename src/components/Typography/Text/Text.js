@@ -1,8 +1,12 @@
 import React from 'react';
 import './styles.scss';
 
-const Text = ({ children }) => {
-  return <p className='typography-text'>{children}</p>;
+const Text = ({ children, alignBetween }) => {
+  return (
+    <p className={`typography-text ${alignBetween ? 'align-between' : ''}`}>
+      {children}
+    </p>
+  );
 };
 
 export { Text };

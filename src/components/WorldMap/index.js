@@ -15,13 +15,13 @@ const WorldMap = () => {
     const { target } = e;
     if (target.tagName === 'svg') return;
 
-    const { clientX, clientY } = window.event;
+    const { pageX: left, pageY: top } = window.event;
 
     setAlert((prevState) => ({
       ...prevState,
       title: target.dataset.name,
-      top: clientY,
-      left: clientX,
+      top,
+      left,
       show: true,
     }));
   };
