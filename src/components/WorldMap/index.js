@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Alert } from '~/components';
 import { ReactComponent as WorldSvg } from './world.svg';
+import { CoronaApi } from '~/api/corona.api.js';
 import './style.scss';
 
 const WorldMap = () => {
+  const coronaApi = CoronaApi();
+
   const [alert, setAlert] = useState({
     title: '',
     top: 0,
@@ -11,7 +14,7 @@ const WorldMap = () => {
     show: false,
   });
 
-  const onMouseOverHandler = (e) => {
+  const onMouseOverHandler = async (e) => {
     const { target } = e;
     if (target.tagName === 'svg') return;
 
