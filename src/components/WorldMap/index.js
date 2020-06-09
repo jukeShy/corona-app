@@ -11,7 +11,7 @@ const WorldMap = () => {
     show: false,
   });
 
-  const onMouseOverHandler = (e) => {
+  const onMouseOverHandler = async (e) => {
     const { target } = e;
     if (target.tagName === 'svg') return;
 
