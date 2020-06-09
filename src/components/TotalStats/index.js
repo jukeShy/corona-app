@@ -1,12 +1,19 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTotalStats } from '~/redux/actions/totalStatsActions';
 import { Typography, List, Card } from '~/components';
 
 const TotalStats = () => {
-  const totalStats = useSelector((state) => state.totalStats);
+  const dispatch = useDispatch();
+  const totalStats = useSelector((state) => state.totalStats.stats);
+  const isLoading = useSelector((state) => state.totalStats.isLoading);
+
+  useEffect(() => {
+    dispatch(getTotalStats());
+  }, [dispatch]);
 
   const _totalStats = totalStats.map((stats) => (
-    <List.ListItem>
+    <List.ListItem key={stats.label}>
       <Card>
         <Typography.Heading Type='h3' style={{ textTransform: 'uppercase' }}>
           {stats.label}
@@ -16,11 +23,9 @@ const TotalStats = () => {
     </List.ListItem>
   ));
 
-  console.log(_totalStats);
-
   return (
     <>
-      <List size='33'>{_totalStats}</List>
+      <List size='33'>{isLoading ? 'Loading...' : _totalStats}</List>
     </>
   );
 };
