@@ -8,8 +8,6 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await coronaApi.getCountries();
-
-      console.log(data);
     };
 
     fetchData();
