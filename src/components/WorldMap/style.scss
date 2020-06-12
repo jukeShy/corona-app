@@ -5,7 +5,8 @@
     
     cursor: pointer;
     &:hover {
-      fill: tomato;
+      fill: rgba(255, 0, 0, 0.5);
+      stroke: transparent;
     }
   }
 }

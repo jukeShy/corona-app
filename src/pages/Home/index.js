@@ -14,7 +14,9 @@ const Home = () => {
   return (
     <DefaultLayout>
       <div className='home'>
-        <Typography.Heading center>Corona App Tracker</Typography.Heading>
+        <Section>
+          <Typography.Heading center>Corona App Tracker</Typography.Heading>
+        </Section>
         <Section>
           {isTotalStatsLoading ? (
             'Loading...'

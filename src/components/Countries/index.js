@@ -7,7 +7,12 @@ const Countries = ({ data }) => {
 
   const _countries = countries.map((country) => (
     <List.ListItem key={country.name}>
-      <Link to={`/country/${country.iso2}`}>
+      <Link
+        to={{
+          pathname: `/country/${country.iso2}`,
+          state: { name: country.name },
+        }}
+      >
         <Card>
           <Typography.Heading Type='h4'>{country.name}</Typography.Heading>
         </Card>

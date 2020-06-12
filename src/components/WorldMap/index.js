@@ -36,7 +36,9 @@ const WorldMap = () => {
 
   const history = useHistory();
   const onClickHandler = (e) => {
-    history.push(`/country/${e.target.dataset.id}`);
+    history.push(`/country/${e.target.dataset.id}`, {
+      name: e.target.dataset.name,
+    });
   };
 
   return (
