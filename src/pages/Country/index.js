@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getCountryStats } from '~/redux/actions/countriesActions';
 import { DefaultLayout, Section } from '~/layouts';
-import { TotalStats, Typography, ChartPie } from '~/components';
+import { TotalStats, Typography, ChartPie, Spinner } from '~/components';
 
 const Country = ({ match, location }) => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const Country = ({ match, location }) => {
         <Typography.Heading center>Corona App Tracker</Typography.Heading>
       </Section>
       {isCountryStatsLoading ? (
-        'Loading...'
+        <Spinner />
       ) : (
         <>
           <Section>

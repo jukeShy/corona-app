@@ -1,7 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { DefaultLayout, Section } from '~/layouts';
-import { WorldMap, TotalStats, Typography, Countries } from '~/components';
+import {
+  WorldMap,
+  TotalStats,
+  Typography,
+  Countries,
+  Spinner,
+} from '~/components';
 
 const Home = () => {
   const totalStats = useSelector((state) => state.totalStats.stats);
@@ -18,17 +24,13 @@ const Home = () => {
           <Typography.Heading center>Corona App Tracker</Typography.Heading>
         </Section>
         <Section>
-          {isTotalStatsLoading ? (
-            'Loading...'
-          ) : (
-            <TotalStats data={totalStats} />
-          )}
+          {isTotalStatsLoading ? <Spinner /> : <TotalStats data={totalStats} />}
         </Section>
         <Section>
           <WorldMap />
         </Section>
         <Section>
-          {isCountriesLoading ? 'Loading...' : <Countries data={countries} />}
+          {isCountriesLoading ? <Spinner /> : <Countries data={countries} />}
         </Section>
       </div>
     </DefaultLayout>
