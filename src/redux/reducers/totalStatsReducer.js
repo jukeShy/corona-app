@@ -16,7 +16,7 @@ const totalStatsReducer = (state = initialState, { type, payload }) => {
     case TOTAL_STATS_LOADING_FALSE:
       return { ...state, isLoading: false };
     case GET_TOTAL_STATS:
-      return { ...state, stats: [...state.stats, ...payload] };
+      return { ...state, stats: [...payload] };
     default:
       return state;
   }

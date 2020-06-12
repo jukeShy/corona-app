@@ -1,31 +1,34 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getTotalStats } from '~/redux/actions/totalStatsActions';
+import React from 'react';
+import { Section } from '~/layouts';
 import { Typography, List, Card } from '~/components';
 
-const TotalStats = () => {
-  const dispatch = useDispatch();
-  const totalStats = useSelector((state) => state.totalStats.stats);
-  const isLoading = useSelector((state) => state.totalStats.isLoading);
+const TotalStats = ({ data }) => {
+  const formatter = new Intl.NumberFormat();
 
-  useEffect(() => {
-    dispatch(getTotalStats());
-  }, [dispatch]);
-
-  const _totalStats = totalStats.map((stats) => (
+  const _totalStats = data.map((stats) => (
     <List.ListItem key={stats.label}>
       <Card>
         <Typography.Heading Type='h3' style={{ textTransform: 'uppercase' }}>
           {stats.label}
         </Typography.Heading>
-        <Typography.Heading Type='h3'>{stats.value}</Typography.Heading>
+        <Typography.Heading Type='h3'>
+          {formatter.format(stats.value)}
+        </Typography.Heading>
       </Card>
     </List.ListItem>
   ));
 
   return (
     <>
-      <List size='33'>{isLoading ? 'Loading...' : _totalStats}</List>
+      {_totalStats.length ? (
+        <>
+          <Section>
+            <List size='33'>{_totalStats}</List>
+          </Section>
+        </>
+      ) : (
+        'There is no data for this country'
+      )}
     </>
   );
 };

@@ -1,28 +1,39 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Typography, List, Card } from '~/components';
-import { getCountries } from '~/redux/actions/countriesActions';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Typography, List, Card, Filter } from '~/components';
 
-const Countries = () => {
-  const dispatch = useDispatch();
-  const countries = useSelector((state) => state.countries.items);
-  const isLoading = useSelector((state) => state.countries.isLoading);
-
-  useEffect(() => {
-    dispatch(getCountries());
-  }, [dispatch]);
+const Countries = ({ data }) => {
+  const [countries, setCountries] = useState(data);
 
   const _countries = countries.map((country) => (
-    <List.ListItem>
-      <Card>
-        <Typography.Heading Type='h4'>{country.name}</Typography.Heading>
-      </Card>
+    <List.ListItem key={country.name}>
+      <Link
+        to={{
+          pathname: `/country/${country.iso2}`,
+          state: { name: country.name },
+        }}
+      >
+        <Card>
+          <Typography.Heading Type='h4'>{country.name}</Typography.Heading>
+        </Card>
+      </Link>
     </List.ListItem>
   ));
 
+  const onSubmitHandler = (value) => {
+    if (!value) return setCountries(data);
+
+    const filtered = countries.filter((country) => country.name === value);
+
+    if (!filtered.length) return setCountries(data);
+
+    setCountries(filtered);
+  };
+
   return (
     <>
-      <List size='100'>{isLoading ? 'Loading...' : _countries}</List>
+      <Filter onSubmit={onSubmitHandler} />
+      <List size='33'>{_countries}</List>
     </>
   );
 };
