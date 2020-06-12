@@ -3,13 +3,17 @@ import { Section } from '~/layouts';
 import { Typography, List, Card } from '~/components';
 
 const TotalStats = ({ data }) => {
+  const formatter = new Intl.NumberFormat();
+
   const _totalStats = data.map((stats) => (
     <List.ListItem key={stats.label}>
       <Card>
         <Typography.Heading Type='h3' style={{ textTransform: 'uppercase' }}>
           {stats.label}
         </Typography.Heading>
-        <Typography.Heading Type='h3'>{stats.value}</Typography.Heading>
+        <Typography.Heading Type='h3'>
+          {formatter.format(stats.value)}
+        </Typography.Heading>
       </Card>
     </List.ListItem>
   ));
