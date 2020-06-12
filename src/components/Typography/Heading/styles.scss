@@ -5,3 +5,16 @@ h1.typography-heading {
 .typography-heading {
   margin: 0;
 }
+
+
+@media (max-width: 800px) {
+  h1.typography-heading {
+    font-size: 5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  h1.typography-heading {
+    font-size: 3rem;
+  }
+}
