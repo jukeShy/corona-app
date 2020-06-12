@@ -36,8 +36,11 @@ const WorldMap = () => {
 
   const history = useHistory();
   const onClickHandler = (e) => {
-    history.push(`/country/${e.target.dataset.id}`, {
-      name: e.target.dataset.name,
+    const { target } = e;
+    if (target.tagName === 'svg') return;
+
+    history.push(`/country/${target.dataset.id}`, {
+      name: target.dataset.name,
     });
   };
 
