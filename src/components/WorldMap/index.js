@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Alert } from '~/components';
 import { ReactComponent as WorldSvg } from './world.svg';
 import './style.scss';
@@ -11,7 +12,7 @@ const WorldMap = () => {
     show: false,
   });
 
-  const onMouseOverHandler = async (e) => {
+  const onMouseOverHandler = (e) => {
     const { target } = e;
     if (target.tagName === 'svg') return;
 
@@ -33,8 +34,9 @@ const WorldMap = () => {
     }));
   };
 
+  const history = useHistory();
   const onClickHandler = (e) => {
-    console.log(e.target.id);
+    history.push(`/country/${e.target.dataset.id}`);
   };
 
   return (

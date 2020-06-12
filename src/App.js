@@ -1,22 +1,24 @@
 import React, { useEffect } from 'react';
-import { Home } from '~/pages';
-import { CoronaApi } from './api/corona.api';
+import { useDispatch } from 'react-redux';
+import { getTotalStats } from '~/redux/actions/totalStatsActions';
+import { getCountries } from '~/redux/actions/countriesActions';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { Home, Country } from '~/pages';
 
 const App = () => {
-  const coronaApi = CoronaApi();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await coronaApi.getCountries();
-    };
-
-    fetchData();
-  }, [coronaApi]);
+    dispatch(getTotalStats());
+    dispatch(getCountries());
+  }, [dispatch]);
 
   return (
-    <>
-      <Home />
-    </>
+    <BrowserRouter>
+      <Route path='/' exact component={Home} />
+      <Route path='/country/:name' exact component={Country} />
+      <Redirect to='/' />
+    </BrowserRouter>
   );
 };
 
